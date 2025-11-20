@@ -33,6 +33,7 @@ body {
 }
 
 /* NAVBAR ------------------------------------- */
+/* PERFECT MOBILE FIX — ONLY APPLIES ON PHONES & TABLETS */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -597,4 +598,130 @@ margin: 30px;
 }
 .logo{
   font-size: 1.6rem;
+}
+/* FINAL PROFESSIONAL MOBILE RESPONSIVE — PERFECT ON ALL PHONES */
+@media (max-width: 768px) {
+  /* Navbar & Buttons */
+  .navbar {
+    padding: 14px 16px;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .logo span {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .nav-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-actions button,
+  .profile-name,
+  .drop-btn {
+    width: 100%;
+    padding: 14px 16px !important;
+    font-size: 1.1rem !important;
+    text-align: center;
+    border-radius: 12px;
+  }
+
+  .profile-dropdown {
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 8px;
+  }
+
+  /* Search Bar */
+  .search-box {
+    flex-direction: column;
+    width: 92%;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .search-input,
+  .icon-btn {
+    width: 100% !important;
+    padding: 16px 18px !important;
+    font-size: 1.1rem !important;
+    border-radius: 14px !important;
+  }
+
+  .icon-btn {
+    margin-top: 12px;
+  }
+
+  /* Hero Text */
+  .hero h1 {
+    font-size: 2.1rem !important;
+    line-height: 1.3;
+    padding: 0 16px;
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    padding: 0 24px;
+  }
+
+  /* Professional Knowledge Hub */
+  .knowledge-hub h2 {
+    font-size: 1.65rem;
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  .knowledge-hub > div {
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 0 20px;
+  }
+
+  .hub-link {
+    display: block;
+    width: 90%;
+    max-width: 360px;
+    padding: 16px 20px;
+    font-size: 1.15rem;
+    text-align: center;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+
+  .hub-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  /* Resource Cards */
+  .resources-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 16px;
+  }
+
+  .resource-card {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Modals */
+  .modal-content {
+    width: 94% !important;
+    max-width: 380px;
+    padding: 24px;
+    border-radius: 20px;
+  }
+
+  .library-header h2 {
+    font-size: 1.7rem;
+  }
 }
