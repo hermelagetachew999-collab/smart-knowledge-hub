@@ -603,22 +603,23 @@ margin: 30px;
   /* Navbar buttons (Login, Signup) */
   .nav-actions button {
     padding: 10px 20px !important;   /* Smaller height */
-    font-size: 0.75rem !important;   /* Smaller text */
+    font-size: 0.95rem !important;   /* Smaller text */
     border-radius: 10px !important;
     width: auto !important;          /* Not full width */
-    min-width: 50px;
+    min-width: 90px;
   }
 
   /* Profile dropdown buttons (Library, Logout, Delete) */
   .profile-name,
   .drop-btn {
     padding: 10px 16px !important;
-    font-size: 0.75rem !important;
+    font-size: 0.95rem !important;
     border-radius: 10px !important;
+    background-color: white;
   }
 
   .profile-dropdown {
-    width: 100px !important;
+    width: 180px !important;
     right: 10px;
     left: auto !important;
   }
@@ -628,7 +629,7 @@ margin: 30px;
     padding: 11px 24px !important;   /* Small & elegant */
     font-size: 0.95rem !important;
     margin-top: 10px;
-    width: 50px !important;
+    width: auto !important;
   }
 
   /* Knowledge Hub links */
