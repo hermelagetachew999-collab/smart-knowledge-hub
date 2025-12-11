@@ -599,46 +599,161 @@ margin: 30px;
 .logo{
   font-size: 1.6rem;
 }
+/* UNIVERSAL MOBILE FIXES — up to tablets */
 @media (max-width: 768px) {
-  /* Navbar buttons (Login, Signup) */
+
+  /* Navbar */
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 15px 20px;
+    gap: 12px;
+  }
+
+  .navbar h1,
+  .logo {
+    font-size: 1.3rem;
+  }
+
+  .nav-actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
   .nav-actions button {
-    padding: 10px 20px !important;   /* Smaller height */
-    font-size: 0.95rem !important;   /* Smaller text */
-    border-radius: 10px !important;
-    width: auto !important;          /* Not full width */
-    min-width: 90px;
-  }
-
-  /* Profile dropdown buttons (Library, Logout, Delete) */
-  .profile-name,
-  .drop-btn {
-    padding: 10px 16px !important;
+    width: 45%;
+    padding: 10px !important;
     font-size: 0.95rem !important;
-    border-radius: 10px !important;
-    background-color: white;
   }
 
-  .profile-dropdown {
-    width: 180px !important;
-    right: 10px;
-    left: auto !important;
+  /* Hero */
+  .hero h1,
+  .hero h2 {
+    font-size: 1.8rem !important;
+    padding: 0 10px;
   }
 
-  /* Search button */
-  .icon-btn {
-    padding: 11px 24px !important;   /* Small & elegant */
-    font-size: 0.95rem !important;
-    margin-top: 10px;
-    width: auto !important;
+  .hero p {
+    font-size: 1rem;
+    padding: 0 15px;
   }
 
-  /* Knowledge Hub links */
-  .hub-link {
-    padding: 12px 20px !important;
+  /* Search box */
+  .search-container {
+    padding: 0 10px;
+  }
+
+  .search-box {
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .search-box input,
+  .search-box button {
+    width: 100%;
+    padding: 14px !important;
     font-size: 1rem !important;
-    width: auto !important;
-    min-width: 140px;
-    display: inline-block;
-    margin: 8px !important;
+  }
+
+  /* Resource cards */
+  .resources-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 10px;
+  }
+
+  .resource-card {
+    max-width: 100%;
+    margin: auto;
+  }
+
+  /* Modal */
+  .modal {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .modal-content {
+    width: 100% !important;
+    max-width: 360px;
+    padding: 18px;
+  }
+
+  .close-btn {
+    font-size: 1.8rem;
+    top: 6px;
+    right: 10px;
+  }
+
+  /* Features Section */
+  .features-section {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+    gap: 20px;
+  }
+
+  /* Animated Box */
+  .animated-box {
+    width: 90%;
+    height: auto;
+    padding: 12px;
+    margin: 20px auto;
+  }
+
+  .animated-img {
+    width: 100%;
+    height: auto;
+  }
+
+  .animated-text-wrapper {
+    height: auto;
+  }
+
+  .animated-text {
+    font-size: 1.2rem;
+  }
+
+  /* Knowledge Hub */
+  .knowledge-hub h2 {
+    font-size: 1.4rem;
+    padding: 0 15px;
+  }
+
+  .hub-link {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px !important;
+    text-align: center;
+    font-size: 1rem !important;
+  }
+
+  /* Profile dropdown */
+  .profile-dropdown {
+    right: 10px !important;
+    width: 160px !important;
+  }
+
+  .drop-btn {
+    padding: 10px !important;
+    font-size: 0.95rem !important;
+  }
+}
+
+/* Extra small screens: phones below 460px */
+@media (max-width: 460px) {
+  .nav-actions button {
+    width: 100%;
+  }
+
+  .hub-link {
+    min-width: unset;
+  }
+
+  .animated-text {
+    font-size: 1rem;
   }
 }
