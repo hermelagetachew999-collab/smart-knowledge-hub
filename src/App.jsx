@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Library from "./pages/Library";
 import LoginModal from "./components/LoginModal";
 import SignupModal from "./components/SignupModal";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 
 const safeJSON = (value, fallback = null) => {
@@ -65,6 +66,7 @@ export default function App() {
         ) : (
           <Home currentUser={currentUser} />
         )}
+        <Footer />
       </div>
 
       {/* LOGIN / SIGNUP MODAL WITH DARK OVERLAY */}

@@ -47,21 +47,17 @@ export default function Library({ onClose, currentUser }) {
         <span className="close-btn" onClick={onClose}>×</span>
       </div>
 
-      {resources.length === 0 ? (
-        <p style={{ color: "var(--muted)", textAlign: "center", marginTop: "60px" }}>
-          No saved resources yet. Go back and save some from Home!
-        </p>
       ) : (
-        <div className="resource-grid">
-          {resources.map((r, i) => (
-            <ResourceCard
-              key={i}
-              resource={r}
-              onSave={() => removeFromLibrary(r)}
-              remove={true}
-            />
-          ))}
-        </div>
+      <div className="resource-grid">
+        {resources.map((r, i) => (
+          <ResourceCard
+            key={i}
+            resource={r}
+            onSave={() => removeFromLibrary(r)}
+            remove={true}
+          />
+        ))}
+      </div>
       )}
     </div>
   );
