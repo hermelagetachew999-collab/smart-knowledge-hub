@@ -9,7 +9,6 @@ const Footer = ({ onNavigate }) => {
                     <p>Empowering you with knowledge.</p>
                 </div>
                 <div className="footer-section">
-                    <h4>Links</h4>
                     <ul className="footer-links">
                         <li><button onClick={() => onNavigate('about')} className="footer-link">About Us</button></li>
                         <li><button onClick={() => onNavigate('privacy')} className="footer-link">Privacy Policy</button></li>
