@@ -6,6 +6,11 @@ import SignupModal from "./components/SignupModal";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 
+import About from "./pages/About";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+import Contact from "./pages/Contact";
+
 const safeJSON = (value, fallback = null) => {
   try {
     if (!value || value === "undefined" || value === "null") return fallback;
@@ -19,7 +24,7 @@ const safeJSON = (value, fallback = null) => {
 export default function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
-  const [showLibrary, setShowLibrary] = useState(false);
+  const [currentView, setCurrentView] = useState("home"); // 'home', 'library', 'about', 'privacy', 'terms', 'contact'
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
@@ -39,7 +44,25 @@ export default function App() {
     localStorage.removeItem("currentUser");
     window.dispatchEvent(new Event("userChanged"));
     setCurrentUser(null);
-    setShowLibrary(false);
+    setCurrentView("home");
+  };
+
+  const renderContent = () => {
+    switch (currentView) {
+      case "library":
+        return <Library onClose={() => setCurrentView("home")} currentUser={currentUser} />;
+      case "about":
+        return <About />;
+      case "privacy":
+        return <Privacy />;
+      case "terms":
+        return <Terms />;
+      case "contact":
+        return <Contact />;
+      case "home":
+      default:
+        return <Home currentUser={currentUser} />;
+    }
   };
 
   return (
@@ -56,17 +79,15 @@ export default function App() {
           currentUser={currentUser}
           onOpenLogin={() => setShowLogin(true)}
           onOpenSignup={() => setShowSignup(true)}
-          onViewLibrary={() => setShowLibrary(true)}
+          onViewLibrary={() => setCurrentView("library")}
+          onNavigate={(view) => setCurrentView(view)}
           onLogout={handleLogout}
-          hideProfileMenu={showLibrary}
+          hideProfileMenu={currentView === "library"}
         />
 
-        {showLibrary ? (
-          <Library onClose={() => setShowLibrary(false)} currentUser={currentUser} />
-        ) : (
-          <Home currentUser={currentUser} />
-        )}
-        <Footer />
+        {renderContent()}
+
+        <Footer onNavigate={setCurrentView} />
       </div>
 
       {/* LOGIN / SIGNUP MODAL WITH DARK OVERLAY */}

@@ -17,6 +17,9 @@ const Footer = ({ onNavigate }) => {
                     </ul>
                 </div>
             </div>
+            <div className="footer-bottom" style={{ textAlign: "center", marginTop: "20px", color: "black" }}>
+                <p>&copy; 2025. All rights reserved. Follow us on Twitter | Facebook | Instagram</p>
+            </div>
         </footer>
     );
 };
