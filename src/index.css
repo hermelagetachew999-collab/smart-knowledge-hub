@@ -795,14 +795,8 @@ body {
 }
 
 /* FOOTER ------------------------------------- */
-/* FOOTER ------------------------------------- */
-.footer {
-  background-color: transparent;
-  color: #000;
-  padding: 40px 0 20px;
-  margin-top: 50px;
-  border-top: 1px solid #444;
-}
+/* Old .footer class removed as we are using inline styles for the bottom footer now.
+   Keeping footer-content and others for the links section. */
 
 .footer-content {
   display: flex;

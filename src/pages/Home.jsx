@@ -78,7 +78,7 @@ const Home = ({ currentUser }) => {
   };
 
   return (
-  
+
     <>
       <div style={{ marginTop: 30 }}>
         <AnimatedText />
@@ -137,7 +137,7 @@ const Home = ({ currentUser }) => {
         <AnimatedBox photos={box2Photos} />
       </div>
 
-     
+
 
       <div className="knowledge-hub" style={{ marginTop: "40px", textAlign: "center" }}>
         <h2>Professional Knowledge Hubs if you want to learn:</h2>
@@ -156,14 +156,6 @@ const Home = ({ currentUser }) => {
         </div>
       </div>
 
-      <footer style={{ background: "#111", color: "#fff", textAlign: "center", padding: "20px 0", marginTop: "40px" }}>
-        <p>
-          © 2025. All rights reserved. Follow us on
-          <a style={{ color: "#1e90ff" }} href="https://twitter.com/yourprofile" target="_blank" rel="noopener noreferrer"> Twitter</a> |
-          <a href="https://facebook.com/yourprofile" target="_blank" rel="noopener noreferrer"> Facebook</a> |
-          <a href="https://instagram.com/yourprofile" target="_blank" rel="noopener noreferrer"> Instagram</a>
-        </p>
-      </footer>
     </>
   );
 
