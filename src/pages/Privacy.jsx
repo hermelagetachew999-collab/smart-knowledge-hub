@@ -2,7 +2,7 @@ import React from "react";
 
 const Privacy = () => {
     return (
-        <div className="container" style={{ padding: "40px 20px", color: "#000000ff" }}>
+        <div className="container" style={{ padding: "40px 20px", color: "#816f6fff", backgroundColor: " " }}>
             <h2>Privacy Policy</h2>
             <p style={{ marginTop: "20px", lineHeight: "1.6", color: "#000000ff" }}>
                 Your privacy is important to us. This privacy policy explains how we collect, use, and protect your personal information.
