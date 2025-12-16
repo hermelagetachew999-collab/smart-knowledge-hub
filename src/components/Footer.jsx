@@ -1,6 +1,6 @@
 import React from "react";
 
-const Footer = () => {
+const Footer = ({ onNavigate }) => {
     return (
         <footer className="footer">
             <div className="container footer-content">
@@ -11,14 +11,11 @@ const Footer = () => {
                 <div className="footer-section">
                     <h4>Links</h4>
                     <ul className="footer-links">
-                        <li><a href="#" className="footer-link">About Us</a></li>
-                        <li><a href="#" className="footer-link">Privacy Policy</a></li>
-                        <li><a href="#" className="footer-link">Terms of Service</a></li>
-                        <li><a href="#" className="footer-link">Contact</a></li>
+                        <li><button onClick={() => onNavigate('about')} className="footer-link">About Us</button></li>
+                        <li><button onClick={() => onNavigate('privacy')} className="footer-link">Privacy Policy</button></li>
+                        <li><button onClick={() => onNavigate('terms')} className="footer-link">Terms of Service</button></li>
+                        <li><button onClick={() => onNavigate('contact')} className="footer-link">Contact</button></li>
                     </ul>
-                </div>
-                <div className="footer-section">
-                    <p>&copy; {new Date().getFullYear()} Smart Knowledge Hub. All rights reserved.</p>
                 </div>
             </div>
         </footer>
