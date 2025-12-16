@@ -592,7 +592,7 @@ margin: 30px;
   border: none;
   cursor: pointer;
   border-radius: 6px;
-  text-align: left;
+  text-align: center;
 }
 
 .drop-btn:hover {
