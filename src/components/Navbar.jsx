@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { FaBook } from "react-icons/fa";
+import { FaBook, FaMoon, FaSun } from "react-icons/fa";
 
 export default function Navbar({
   currentUser,
@@ -7,8 +6,10 @@ export default function Navbar({
   onOpenSignup,
   onViewLibrary,
   onLogout,
-  onNavigate, // ← NEW: for generic navigation (e.g. Home)
-  hideProfileMenu = false   // ← NEW: hides menu when in Library
+  onNavigate,
+  hideProfileMenu = false,
+  isDarkMode,
+  onToggleDarkMode
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -52,7 +53,7 @@ export default function Navbar({
   };
 
   return (
-    <nav className="navbar" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+    <nav className="navbar">
       <div
         className="logo"
         style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
@@ -62,7 +63,23 @@ export default function Navbar({
         <span>Smart Knowledge Hub</span>
       </div>
 
-      <div className="nav-actions">
+      <div className="nav-actions" style={{ display: "flex", alignItems: "center" }}>
+        <button
+          onClick={onToggleDarkMode}
+          style={{
+            background: "none",
+            border: "none",
+            color: "var(--navbar-text)",
+            fontSize: "20px",
+            cursor: "pointer",
+            marginRight: "15px",
+            display: "flex",
+            alignItems: "center"
+          }}
+          title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+        >
+          {isDarkMode ? <FaSun /> : <FaMoon />}
+        </button>
         {!currentUser ? (
           <>
             <button onClick={onOpenLogin}>Login</button>

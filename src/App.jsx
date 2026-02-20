@@ -26,6 +26,17 @@ export default function App() {
   const [showSignup, setShowSignup] = useState(false);
   const [currentView, setCurrentView] = useState("home"); // 'home', 'library', 'about', 'privacy', 'terms', 'contact'
   const [currentUser, setCurrentUser] = useState(null);
+  const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem("theme") === "dark");
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add("dark-theme");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.body.classList.remove("dark-theme");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDarkMode]);
 
   useEffect(() => {
     const updateUser = () => {
@@ -46,6 +57,8 @@ export default function App() {
     setCurrentUser(null);
     setCurrentView("home");
   };
+
+  const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
   const renderContent = () => {
     switch (currentView) {
@@ -83,6 +96,8 @@ export default function App() {
           onNavigate={(view) => setCurrentView(view)}
           onLogout={handleLogout}
           hideProfileMenu={currentView === "library"}
+          isDarkMode={isDarkMode}
+          onToggleDarkMode={toggleDarkMode}
         />
 
         {renderContent()}

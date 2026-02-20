@@ -2,9 +2,9 @@ import React from "react";
 
 const Contact = () => {
     return (
-        <div className="container" style={{ padding: "40px 20px", color: "#fff" }}>
+        <div className="page-container">
             <h2>Contact Us</h2>
-            <p style={{ marginTop: "20px", lineHeight: "1.6", color: "#ddd" }}>
+            <p>
                 Have questions or feedback? We'd love to hear from you!
             </p>
             <div style={{ marginTop: "30px" }}>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ResourceCard from "../components/ResourceCard";
 import AnimatedBox from "../components/AnimatedBox";
 import { box1Photos, box2Photos } from "../components/AnimatedBoxData";
-import { fetchYouTube, fetchLinksAndPdfs } from "../utils/api";
+import { fetchYouTube, fetchLinksAndPdfs, fetchWikipedia, fetcharXiv } from "../utils/api";
 import AnimatedText from "../components/AnimatedText";
 
 const safeJSON = (value, fallback = null) => {
@@ -29,6 +29,7 @@ const Home = ({ currentUser }) => {
   const [resources, setResources] = useState([]);
   const [loading, setLoading] = useState(false);
   const [q, setQ] = useState("");
+  const [source, setSource] = useState("all"); // 'all', 'youtube', 'web', 'wikipedia', 'arxiv'
 
   const handleSearch = async (query) => {
     if (!query.trim()) return;
@@ -36,13 +37,19 @@ const Home = ({ currentUser }) => {
     setResources([]);
 
     try {
-      const [videos, links] = await Promise.all([
-        fetchYouTube(query),
-        fetchLinksAndPdfs(query),
-      ]);
-      const merged = [...videos, ...links];
+      let results = [];
+      const fetchers = [];
+
+      if (source === "all" || source === "youtube") fetchers.push(fetchYouTube(query));
+      if (source === "all" || source === "web") fetchers.push(fetchLinksAndPdfs(query));
+      if (source === "all" || source === "wikipedia") fetchers.push(fetchWikipedia(query));
+      if (source === "all" || source === "arxiv") fetchers.push(fetcharXiv(query));
+
+      const responseArrays = await Promise.all(fetchers);
+      results = responseArrays.flat();
+
       const seen = new Set();
-      const unique = merged.filter((item) => !seen.has(item.link) && seen.add(item.link));
+      const unique = results.filter((item) => !seen.has(item.link) && seen.add(item.link));
       setResources(unique);
     } catch (err) {
       alert("Search failed!");
@@ -89,7 +96,7 @@ const Home = ({ currentUser }) => {
           <h1>Find PDFs, Videos and Links — fast</h1>
           <p>Search the web, preview resources, and save what matters.</p>
 
-          <div className="search-box" style={{ justifyContent: "center" }}>
+          <div className="search-box">
             <input
               className="search-input"
               value={q}
@@ -103,10 +110,31 @@ const Home = ({ currentUser }) => {
               }}
             />
 
+            <select
+              className="source-select"
+              value={source}
+              onChange={(e) => setSource(e.target.value)}
+              style={{
+                padding: "10px",
+                borderRadius: "8px",
+                border: "1px solid #ddd",
+                marginLeft: "10px",
+                fontSize: "16px",
+                cursor: "pointer"
+              }}
+            >
+              <option value="all">All Sources</option>
+              <option value="youtube">YouTube</option>
+              <option value="web">Web (Google)</option>
+              <option value="wikipedia">Wikipedia</option>
+              <option value="arxiv">arXiv</option>
+            </select>
+
             <button
               className="icon-btn"
               onClick={() => handleSearch(q)}
               disabled={loading}
+              style={{ marginLeft: "10px" }}
             >
               {loading ? "Searching..." : "Search"}
             </button>
@@ -132,22 +160,14 @@ const Home = ({ currentUser }) => {
         </div>
       </div>
 
-      <div className="features-section" style={{ display: "flex", gap: "20px", margin: "40px 0" }}>
+      <div className="features-section">
         <AnimatedBox photos={box1Photos} />
         <AnimatedBox photos={box2Photos} />
       </div>
 
-
-
-      <div className="knowledge-hub" style={{ marginTop: "40px", textAlign: "center" }}>
+      <div className="knowledge-hub">
         <h2>Professional Knowledge Hubs if you want to learn:</h2>
-        <div style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "20px",
-          flexWrap: "wrap",
-          marginTop: "16px",
-        }}>
+        <div className="hub-links-container">
           <a href="https://www.coursera.org/" target="_blank" rel="noopener noreferrer" className="hub-link">Coursera</a>
           <a href="https://www.edx.org/" target="_blank" rel="noopener noreferrer" className="hub-link">edX</a>
           <a href="https://www.khanacademy.org/" target="_blank" rel="noopener noreferrer" className="hub-link">Khan Academy</a>

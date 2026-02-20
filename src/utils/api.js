@@ -59,7 +59,7 @@ export const fetchLinksAndPdfs = async (query) => {
     if (!data.items) return [];
 
     return data.items.map((item) => ({
-      type: "link", // or "pdf" if you want to detect PDFs
+      type: "link",
       title: item.title,
       link: item.link,
       thumbnail: item.pagemap?.cse_thumbnail?.[0]?.src || null,
@@ -67,6 +67,73 @@ export const fetchLinksAndPdfs = async (query) => {
     }));
   } catch (err) {
     console.error("Google Search API error:", err);
+    return [];
+  }
+};
+
+// ------------------
+// WIKIPEDIA SEARCH
+// ------------------
+export const fetchWikipedia = async (query) => {
+  const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(
+    query
+  )}&format=json&origin=*`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (!data.query || !data.query.search) return [];
+
+    return data.query.search.map((item) => ({
+      type: "wikipedia",
+      title: item.title,
+      link: `https://en.wikipedia.org/wiki/${encodeURIComponent(item.title)}`,
+      thumbnail: "https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png",
+      channel: "Wikipedia",
+      snippet: item.snippet.replace(/<\/?[^>]+(>|$)/g, ""), // strip html tags
+    }));
+  } catch (err) {
+    console.error("Wikipedia API error:", err);
+    return [];
+  }
+};
+
+// ------------------
+// ARXIV SEARCH
+// ------------------
+export const fetcharXiv = async (query) => {
+  const url = `https://export.arxiv.org/api/query?search_query=all:${encodeURIComponent(
+    query
+  )}&start=0&max_results=10`;
+
+  try {
+    const res = await fetch(url);
+    const text = await res.text();
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(text, "text/xml");
+    const entries = xmlDoc.getElementsByTagName("entry");
+
+    const results = [];
+    for (let i = 0; i < entries.length; i++) {
+      const entry = entries[i];
+      const title = entry.getElementsByTagName("title")[0]?.textContent;
+      const id = entry.getElementsByTagName("id")[0]?.textContent;
+      const summary = entry.getElementsByTagName("summary")[0]?.textContent;
+      const authors = Array.from(entry.getElementsByTagName("author")).map(a => a.getElementsByTagName("name")[0]?.textContent).join(", ");
+
+      results.push({
+        type: "arxiv",
+        title: title?.trim(),
+        link: id,
+        thumbnail: "https://static.arxiv.org/static/browse/0.3.4/images/icons/favicon.ico",
+        channel: authors,
+        snippet: summary?.trim().substring(0, 200) + "..."
+      });
+    }
+    return results;
+  } catch (err) {
+    console.error("arXiv API error:", err);
     return [];
   }
 };
