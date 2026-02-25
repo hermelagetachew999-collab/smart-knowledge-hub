@@ -117,18 +117,21 @@ export default function Library({ onClose, currentUser }) {
         </div>
       </div>
 
+      {resources.length === 0 ? (
+        <div style={{ textAlign: "center", padding: "40px", color: "#666" }}>
+          <p>Your library is empty. Save some resources from the home page!</p>
+        </div>
       ) : (
-      <div className="resource-grid">
-        {resources.map((r, i) => (
-          <ResourceCard
-            key={i}
-            resource={r}
-            onSave={() => removeFromLibrary(r)}
-            onUpdate={updateResource}
-            remove={true}
-          />
-        ))}
-      </div>
+        <div className="resource-grid">
+          {resources.map((r, i) => (
+            <ResourceCard
+              key={i}
+              resource={r}
+              onSave={() => removeFromLibrary(r)}
+              remove={true}
+            />
+          ))}
+        </div>
       )}
     </div>
   );

@@ -1,5 +1,15 @@
 import React, { useState } from "react";
 
+const safeJSON = (item, fallback = []) => {
+  try {
+    if (!item || item === "undefined" || item === "null") return fallback;
+    const parsed = JSON.parse(item);
+    return Array.isArray(parsed) ? parsed : fallback;
+  } catch {
+    return fallback;
+  }
+};
+
 export default function SignupModal({ onClose, onSuccess, switchToLogin }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -18,16 +28,9 @@ export default function SignupModal({ onClose, onSuccess, switchToLogin }) {
       alert("Please enter a valid email address.");
       return;
     }
-const safeJSON = (item, fallback = []) => {
-  try {
-    if (!item || item === "undefined" || item === "null") return fallback;
-    const parsed = JSON.parse(item);
-    return Array.isArray(parsed) ? parsed : fallback;
-  } catch {
-    return fallback;
-  }
-};
-  const users = safeJSON(localStorage.getItem("users"), []);
+
+    const users = safeJSON(localStorage.getItem("users"), []);
+
 
     if (users.find((u) => u.email === email)) {
       alert("This email is already registered.");

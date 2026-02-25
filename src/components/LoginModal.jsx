@@ -1,5 +1,15 @@
 import React, { useState } from "react";
 
+const safeJSON = (item, fallback = []) => {
+  try {
+    if (!item || item === "undefined" || item === "null") return fallback;
+    const parsed = JSON.parse(item);
+    return Array.isArray(parsed) ? parsed : fallback;
+  } catch {
+    return fallback;
+  }
+};
+
 export default function LoginModal({ onClose, onSuccess, switchToSignup }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,7 +22,7 @@ export default function LoginModal({ onClose, onSuccess, switchToSignup }) {
       return;
     }
 
- const users = safeJSON(localStorage.getItem("users"), []);
+    const users = safeJSON(localStorage.getItem("users"), []);
     const user = users.find((u) => u.email === email && u.password === password);
 
     if (!user) {
@@ -22,18 +32,10 @@ export default function LoginModal({ onClose, onSuccess, switchToSignup }) {
 
     localStorage.setItem("currentUser", JSON.stringify(user));
     alert("Login successful!");
-    onSuccess(user); // ← THIS WAS MISSING
+    onSuccess(user);
     onClose();
   };
-const safeJSON = (item, fallback = []) => {
-  try {
-    if (!item || item === "undefined" || item === "null") return fallback;
-    const parsed = JSON.parse(item);
-    return Array.isArray(parsed) ? parsed : fallback;
-  } catch {
-    return fallback;
-  }
-};
+
   return (
     <div className="modal">
       <div className="modal-content">
