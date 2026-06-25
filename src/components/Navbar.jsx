@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaBook, FaMoon, FaSun } from "react-icons/fa";
+import { FaBook, FaMoon, FaSun, FaBars, FaTimes } from "react-icons/fa";
 
 export default function Navbar({
   currentUser,
@@ -64,7 +64,24 @@ export default function Navbar({
         <span>Smart Knowledge Hub</span>
       </div>
 
-      <div className="nav-actions" style={{ display: "flex", alignItems: "center" }}>
+      {/* Mobile menu button */}
+      <button
+        className="mobile-menu-btn"
+        onClick={() => setMenuOpen(!menuOpen)}
+        style={{
+          display: "none",
+          background: "none",
+          border: "none",
+          color: "var(--navbar-text)",
+          fontSize: "24px",
+          cursor: "pointer",
+          padding: "8px"
+        }}
+      >
+        {menuOpen ? <FaTimes /> : <FaBars />}
+      </button>
+
+      <div className={`nav-actions ${menuOpen ? "nav-actions-open" : ""}`} style={{ display: "flex", alignItems: "center" }}>
         <button
           onClick={onToggleDarkMode}
           style={{
